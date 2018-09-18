@@ -32,7 +32,9 @@ function fromRequest(req){
 
 // Include Controllers
 app.use('/auth', expressJWT({
-  secret: process.env.JWT_SECRET,
+  // ! replace secret back to the env for production
+  // secret: process.env.JWT_SECRET,
+  secret: 'Impenetrable 🦄 lock',
   getToken: fromRequest,
 }).unless({
   path: [
