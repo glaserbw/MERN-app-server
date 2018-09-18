@@ -48,7 +48,9 @@ userSchema.set('toJSON', {
     const returnJson = {
       id: user._id,
       email: user.email,
-      name: user.name
+      firstname: user.firstname,
+      workingCapital: user.workingCapital,
+      portfolio: user.portfolio,     
     };
     return returnJson;
   }

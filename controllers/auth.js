@@ -81,6 +81,7 @@ router.post('/me/from/token', function(req, res) {
   console.log(req.user)
   db.User.findById(req.user.id)
   .then(function(user){
+    console.log(user)
     res.send({ user: user });
   })
   .catch(function(err){
