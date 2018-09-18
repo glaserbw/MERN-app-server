@@ -7,7 +7,7 @@ const expressJWT = require('express-jwt');
 const favicon = require('serve-favicon');
 const path = require('path');
 
-// Declare ap
+// Declare app
 const app = express();
 
 // Middleware - serve favicon
@@ -20,7 +20,8 @@ app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({extended: false}));
 
-// 
+// Helper function for Auth
+// TODO: Break fromRequest out into separate file.
 function fromRequest(req){
   if(req.body.headers.Authorization &&
     req.body.headers.Authorization.split(' ')[0] === 'Bearer'){
@@ -30,7 +31,15 @@ function fromRequest(req){
 }
 
 // Include Controllers
-app.use('/users', require('./controllers/users'));
+app.use('/auth', expressJWT({
+  secret: process.env.JWT_SECRET,
+  getToken: fromRequest,
+}).unless({
+  path: [
+    { url: '/auth/login', methods: ['POST'] },
+    { url: '/auth/signup', methods: ['POST'] }
+  ]
+}), require('./controllers/auth'));
 
 // Define catch all route 
 app.get('*', (req, res) => {
@@ -39,4 +48,4 @@ app.get('*', (req, res) => {
 });
 
 // Listen
-app.listen(8000, () => console.log('lisetening on 8k'));
+app.listen(process.env.PORT || 8000, () => console.log('lisetening on 8k'));

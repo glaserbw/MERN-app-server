@@ -1,3 +1,5 @@
+// ! Might not need this controller.  
+
 const express = require('express');
 const router = express.Router();
 const db = require('../models'); 
@@ -5,6 +7,7 @@ const db = require('../models');
 router.get('/', (req, res) => {
 	db.User.find()
 	.then(users => {
+		console.log('users controller did something')
 		res.send(users);
 	})
 	.catch(err => {
@@ -22,6 +25,7 @@ router.get('/createuser', (req, res) => {
 		color: 'blue'
 	})
 	.then(result => {
+		console.log('users controller did something')
 		res.send('success');
 	})
 	.catch(err => {

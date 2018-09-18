@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema({
   profileImg: {
     type: String,
   },
+  workingCapital: {
+    type: Number,
+  },
   portfolio: [portfolioSchema],
 });
 
