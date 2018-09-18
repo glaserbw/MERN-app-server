@@ -1,8 +1,20 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+const portfolioSchema = new mongoose.Schema({
+  symbol: String,
+  numShares: Number,
+  purchasePrice: Number,
+});
+
 const userSchema = new mongoose.Schema({
-  name: {
+  firstname: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 99
+  },
+  lastname: {
     type: String,
     required: true,
     minlength: 1,
@@ -15,12 +27,23 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 99
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: 5,
+    maxlength: 99,
+  },
   password: {
     type: String,
     required: true,
     minlength: 6,
     maxlength: 99
-  }
+  },
+  profileImg: {
+    type: String,
+  },
+  portfolio: [portfolioSchema],
 });
 
 // Override 'toJSON' to prevent the password from being returned with the user
