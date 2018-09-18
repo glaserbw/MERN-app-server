@@ -1,8 +1,11 @@
-// Require Mongoose node module
-const mongoose = require('mongoose'); 
+// Mongoose require and connect
+const mongoose = require('mongoose');
 
-// Connect to your Mongoose database
-mongoose.connect(process.env.MONGOOSE_URL || 'mongodb://localhost:27017/mern-app', { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mernauthwdi20',
+  { useNewUrlParser: true });
 
-// Gather up your models 
+// Deprecation warning: https://github.com/Automattic/mongoose/issues/6922
+mongoose.set('useCreateIndex', true);
+
+// Include models from this folder
 module.exports.User = require('./user');
