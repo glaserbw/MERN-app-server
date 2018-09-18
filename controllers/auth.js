@@ -37,9 +37,8 @@ router.post('/login', (req, res) => {
 
 // POST /auth/signup route - create a user in the DB and then log them in
 router.post('/signup', function(req, res) {
-  console.log('BODY', req.body);
-  // console.log('REST', req)
-  //TODO: First check if the user already exists
+  console.log('body', req.body);
+  // TODO: First check if the user already exists
   db.User.findOne({ email: req.body.email })
   .then((user) => {
     // Database call was a success
@@ -47,7 +46,6 @@ router.post('/signup', function(req, res) {
       // If the user exists already, don't let them create a duplicate account. Instead they should log in.
       return res.status(400).send('User exists already!');
     }
-
     // Great! This is a new user. Let's make them an account!
     db.User.create(req.body)
     .then((createdUser) => {
