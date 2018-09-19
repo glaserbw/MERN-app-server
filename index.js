@@ -49,4 +49,4 @@ app.get('*', (req, res) => {
 });
 
 // Listen
-app.listen(process.env.PORT || 8000, () => console.log('lisetening on 8k'));
+app.listen(process.env.PORT || 8000, () => console.log('listening on 8k'));
