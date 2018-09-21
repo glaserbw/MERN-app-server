@@ -42,6 +42,8 @@ app.use('/auth', expressJWT({
   ]
 }), require('./controllers/auth'));
 
+app.use('/users', require('./controllers/users'));
+
 // Define catch all route 
 app.get('*', (req, res) => {
 	// TODO: Build and render 404 page

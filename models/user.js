@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 const portfolioSchema = new mongoose.Schema({
   symbol: String,
   numShares: Number,
-  purchasePrice: Number,
 });
 
 const userSchema = new mongoose.Schema({
